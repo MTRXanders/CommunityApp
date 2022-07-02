@@ -5,10 +5,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.community.model.Membership;
 import com.example.community.repository.MembershipRepository;
 
+@Service("membershipService")
+@Transactional
 public class MembershipServiceImpl implements CrudService<Membership> {
 
     @Autowired

@@ -2,12 +2,44 @@ package com.example.community.model;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "posts")
 public class Post {
+
+    @Id
+    @Column(name = "post_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Lob
+    @Column(name = "title", length = 128)
     private String title;
 
+    @Lob
+    @Column(name = "message", length = 512)
     private String message;
+
+    @ManyToOne
+    @JoinColumn(name = "channel_id", nullable = false)
+    private Channel channel;
+
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
 
     public UUID getId() {
         return id;
@@ -37,6 +69,7 @@ public class Post {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((channel == null) ? 0 : channel.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((message == null) ? 0 : message.hashCode());
         result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -52,6 +85,11 @@ public class Post {
         if (getClass() != obj.getClass())
             return false;
         Post other = (Post) obj;
+        if (channel == null) {
+            if (other.channel != null)
+                return false;
+        } else if (!channel.equals(other.channel))
+            return false;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -69,6 +107,5 @@ public class Post {
             return false;
         return true;
     }
-    
     
 }

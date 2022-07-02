@@ -5,10 +5,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.community.model.Subscription;
 import com.example.community.repository.SubscriptionRepository;
 
+@Service("subscriptionService")
+@Transactional
 public class SubscriptionServiceImpl implements CrudService<Subscription>{
 
     @Autowired

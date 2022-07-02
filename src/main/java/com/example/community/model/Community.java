@@ -1,14 +1,30 @@
 package com.example.community.model;
 
-import java.util.ArrayList;
+import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "communities")
 public class Community {
+    @Id
+    @Column(name = "community_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(name = "name", length = 60, nullable = false)
     private String name;
 
-    private ArrayList<Channel> channels;
+    @OneToMany(mappedBy = "community")
+    @Column(name = "channels")
+    private Set<Channel> channels;
 
     public Community(String name) {
         this.name = name;
@@ -30,11 +46,11 @@ public class Community {
         this.name = name;
     }
 
-    public ArrayList<Channel> getChannels() {
+    public Set<Channel> getChannels() {
         return channels;
     }
 
-    public void setChannels(ArrayList<Channel> channels) {
+    public void setChannels(Set<Channel> channels) {
         this.channels = channels;
     }
 

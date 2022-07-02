@@ -1,14 +1,45 @@
 package com.example.community.model;
 
-import java.util.ArrayDeque;
+import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "channels")
 public class Channel {
+    
+    @Id
+    @Column(name = "channel_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(name = "name", length = 60, nullable = false)
     private String name;
 
-    private ArrayDeque<Post> posts;
+    @Column(name = "posts")
+    @OneToMany(mappedBy = "channel")
+    private Set<Post> posts;
+
+    @ManyToOne
+    @JoinColumn(name = "community_id", nullable = false)
+    private Community community;
+
+    public Community getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(Community community) {
+        this.community = community;
+    }
 
     public Channel(String name) {
         this.name = name;
@@ -30,11 +61,11 @@ public class Channel {
         this.name = name;
     }
 
-    public ArrayDeque<Post> getPosts() {
+    public Set<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(ArrayDeque<Post> posts) {
+    public void setPosts(Set<Post> posts) {
         this.posts = posts;
     }
 
@@ -42,6 +73,7 @@ public class Channel {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((community == null) ? 0 : community.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((posts == null) ? 0 : posts.hashCode());
@@ -57,6 +89,11 @@ public class Channel {
         if (getClass() != obj.getClass())
             return false;
         Channel other = (Channel) obj;
+        if (community == null) {
+            if (other.community != null)
+                return false;
+        } else if (!community.equals(other.community))
+            return false;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -75,4 +112,5 @@ public class Channel {
         return true;
     }
 
+   
 }

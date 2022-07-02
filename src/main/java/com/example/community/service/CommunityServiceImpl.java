@@ -5,10 +5,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.community.model.Community;
 import com.example.community.repository.CommunityRepository;
 
+@Service("communityService")
+@Transactional
 public class CommunityServiceImpl implements CrudService<Community>{
 
     @Autowired

@@ -13,27 +13,26 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="User")
+@Table(name="users")
 public class User {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", length = 60, nullable = false)
     private String name;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", length = 60, nullable = false)
     private String email;
  
-    @Column(name = "telephone")
+    @Column(name = "telephone", length = 34)
     private String telephone;
 
-    @Column(name="roles", nullable = true)
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy= "user", cascade = CascadeType.PERSIST)
     private List<Role> roles;
 
-    @Column(name="claims", nullable = true)
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<Claim> claims;
 
 public UUID getId() {

@@ -2,11 +2,28 @@ package com.example.community.model;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "claims")
 public class Claim {
+    @Id
+    @Column(name = "claim_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private UUID userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
+    @Column(name = "name", length = 60, nullable = false)
     private String name;
 
     public UUID getId() {
@@ -17,12 +34,13 @@ public class Claim {
         this.id = id;
     }
 
-    public UUID getUserId() {
-        return userId;
+   
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getName() {
@@ -39,7 +57,7 @@ public class Claim {
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
         return result;
     }
 
@@ -62,12 +80,13 @@ public class Claim {
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (userId == null) {
-            if (other.userId != null)
+        if (user == null) {
+            if (other.user != null)
                 return false;
-        } else if (!userId.equals(other.userId))
+        } else if (!user.equals(other.user))
             return false;
         return true;
     }
-    
+
+  
 }

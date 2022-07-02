@@ -2,16 +2,39 @@ package com.example.community.model;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+// import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "subscriptions")
 public class Subscription {
+
+    @Id
+    @Column(name = "subscription_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(name = "name", length = 60, nullable = false)
+    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "channel_id", nullable = false)
     private Channel channel;
 
-    private UUID userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    public Subscription(Channel channel, UUID userId) {
+    public Subscription(Channel channel, User user) {
         this.channel = channel;
-        this.userId = userId;
+        this.user = user;
     }
 
     public UUID getId() {
@@ -26,16 +49,16 @@ public class Subscription {
         this.channel = channel;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
-    }
-
     public Channel getChannel() {
         return channel;
     }
 
-    public UUID getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -44,7 +67,7 @@ public class Subscription {
         int result = 1;
         result = prime * result + ((channel == null) ? 0 : channel.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
         return result;
     }
 
@@ -67,12 +90,12 @@ public class Subscription {
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (userId == null) {
-            if (other.userId != null)
+        if (user == null) {
+            if (other.user != null)
                 return false;
-        } else if (!userId.equals(other.userId))
+        } else if (!user.equals(other.user))
             return false;
         return true;
     }
-    
+
 }

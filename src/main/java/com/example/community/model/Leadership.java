@@ -2,20 +2,39 @@ package com.example.community.model;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "leaderships")
 public class Leadership {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "leadership_id")
     private UUID id;
 
+    @Column(name = "name", length = 60, nullable = false)
     private String name;
 
-    private UUID comunityId;
+    @OneToOne
+    @JoinColumn(name = "community_id")
+    private Community comunity;
 
-    private UUID userId;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     
-    public Leadership(UUID comunityId, UUID userId) {
-        this.comunityId = comunityId;
-        this.userId = userId;
+    public Leadership(Community comunity, User user) {
+        this.comunity = comunity;
+        this.user = user;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -32,29 +51,30 @@ public class Leadership {
         this.id = id;
     }
 
-    public UUID getComunityId() {
-        return comunityId;
+    public Community getComunity() {
+        return comunity;
     }
 
-    public void setComunityId(UUID comunityId) {
-        this.comunityId = comunityId;
+    public void setComunity(Community comunity) {
+        this.comunity = comunity;
     }
 
-    public UUID getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((comunityId == null) ? 0 : comunityId.hashCode());
+        result = prime * result + ((comunity == null) ? 0 : comunity.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
         return result;
     }
 
@@ -67,23 +87,30 @@ public class Leadership {
         if (getClass() != obj.getClass())
             return false;
         Leadership other = (Leadership) obj;
-        if (comunityId == null) {
-            if (other.comunityId != null)
+        if (comunity == null) {
+            if (other.comunity != null)
                 return false;
-        } else if (!comunityId.equals(other.comunityId))
+        } else if (!comunity.equals(other.comunity))
             return false;
         if (id == null) {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (userId == null) {
-            if (other.userId != null)
+        if (name == null) {
+            if (other.name != null)
                 return false;
-        } else if (!userId.equals(other.userId))
+        } else if (!name.equals(other.name))
+            return false;
+        if (user == null) {
+            if (other.user != null)
+                return false;
+        } else if (!user.equals(other.user))
             return false;
         return true;
     }
+
+    
 
     
 }

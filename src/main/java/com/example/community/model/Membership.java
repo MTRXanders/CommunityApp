@@ -2,18 +2,33 @@ package com.example.community.model;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "memberships")
 public class Membership {
-    
+    @Id
+    @Column(name = "membership_id")
     private UUID id;
 
-    private UUID userId;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    @Column(name = "name", length = 60, nullable = false)
     private String name;
 
+    @OneToOne
+    @JoinColumn(name = "community_id")
     private Community community;
 
-    public Membership(UUID userId, Community community) {
-        this.userId = userId;
+    public Membership(User user, Community community) {
+        this.user = user;
         this.community = community;
     }
 
@@ -29,8 +44,8 @@ public class Membership {
         return id;
     }
 
-    public UUID getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     public Community getCommunity() {
@@ -41,8 +56,8 @@ public class Membership {
         this.id = id;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setCommunity(Community community) {
@@ -55,7 +70,7 @@ public class Membership {
         int result = 1;
         result = prime * result + ((community == null) ? 0 : community.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
         return result;
     }
 
@@ -78,10 +93,10 @@ public class Membership {
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (userId == null) {
-            if (other.userId != null)
+        if (user == null) {
+            if (other.user != null)
                 return false;
-        } else if (!userId.equals(other.userId))
+        } else if (!user.equals(other.user))
             return false;
         return true;
     }

@@ -2,9 +2,28 @@ package com.example.community.model;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "admins")
 public class Admin {
+    @Id
+    @Column(name = "admin_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(name = "name", length = 60, nullable = false)
+    private String name;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public UUID getId() {
