@@ -3,7 +3,6 @@ package com.example.community.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +43,7 @@ public class UserRestApiController {
     
     // -------------------Retrieve Single User----------------------------------
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> getUser(@PathVariable("id") UUID id) {
+    public ResponseEntity<?> getUser(@PathVariable("id") Long id) {
         Optional<User> user = userService.findById(id);
 
         if (!user.isPresent())
@@ -53,7 +52,7 @@ public class UserRestApiController {
     }
 
     // -------------------Create a User-------------------------------------------
- 
+    // @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
     @RequestMapping(value = "/user/", method = RequestMethod.POST)
     public ResponseEntity<?> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
         logger.info("Creating User : {}", user);
@@ -73,7 +72,7 @@ public class UserRestApiController {
     // ------------------- Update a User ------------------------------------------------
  
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateUser(@PathVariable("id") UUID id, @RequestBody User user) {
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody User user) {
         logger.info("Updating User with id {}", id);
  
         Optional<User> currentUser = userService.findById(id);
@@ -98,7 +97,7 @@ public class UserRestApiController {
     // ------------------- Delete a User-----------------------------------------
  
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteUser(@PathVariable("id") UUID id) {
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
         logger.info("Fetching & Deleting User with id {}", id);
  
         Optional<User> user = userService.findById(id);

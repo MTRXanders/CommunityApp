@@ -6,9 +6,6 @@ import org.springframework.context.annotation.Import;
 
 import com.example.community.config.JpaConfiguration;
 
-// import com.example.community.config.JpaConfiguration;
-
-// import net.bytebuddy.dynamic.loading.ClassLoadingStrategy.Configurable;
 
 @SpringBootApplication
 @Import(JpaConfiguration.class)
@@ -16,7 +13,5 @@ public class CommunityApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CommunityApplication.class, args);
-		
 	}
-
 }

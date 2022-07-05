@@ -2,7 +2,6 @@ package com.example.community.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class ChannelServiceImpl implements CrudService<Channel> {
     }
 
     @Override
-    public void deleteEntityById(UUID id) {
+    public void deleteEntityById(Long id) {
        channelRepository.deleteById(id);        
     }
 
@@ -34,7 +33,7 @@ public class ChannelServiceImpl implements CrudService<Channel> {
     }
 
     @Override
-    public Optional<Channel> findById(UUID id) {
+    public Optional<Channel> findById(Long id) {
        return channelRepository.findById(id);
     }
 

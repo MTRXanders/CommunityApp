@@ -2,10 +2,9 @@ package com.example.community.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface CrudService<T> {
-    Optional<T> findById(UUID id);
+    Optional<T> findById(Long id);
  
     T findByName(String name);
  
@@ -13,7 +12,7 @@ public interface CrudService<T> {
  
     void updateEntity(T entity);
  
-    void deleteEntityById(UUID id);
+    void deleteEntityById(Long id);
  
     void deleteAllEntities();
  

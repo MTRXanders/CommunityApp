@@ -1,7 +1,6 @@
 package com.example.community.model;
 
 import java.util.Set;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +19,7 @@ public class Channel {
     @Id
     @Column(name = "channel_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
 
     @Column(name = "name", length = 60, nullable = false)
     private String name;
@@ -45,11 +44,11 @@ public class Channel {
         this.name = name;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

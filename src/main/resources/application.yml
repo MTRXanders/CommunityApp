@@ -11,7 +11,24 @@ datasource:
       format_sql: true
       hbm2ddl.method: update
       show_sql: true
+      #dll-auto: none
     maxPoolSize: 20
     password: password
     url: "jdbc:mysql://localhost:3306/docker_db"
     username: root
+
+
+#value for injection in field of controller 
+welcome:
+    message: Hello Dwulfe
+
+#Path where to find PWA views files
+spring:
+    mvc:
+        view:
+            prefix: /WEB-INF/jsp/
+            suffix: .jsp
+    liquibase:
+      enabled: false
+
+

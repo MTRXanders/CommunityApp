@@ -1,6 +1,5 @@
 package com.example.community.model;
 
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +13,7 @@ import javax.persistence.Table;
 public class Membership {
     @Id
     @Column(name = "membership_id")
-    private UUID id;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -40,7 +39,7 @@ public class Membership {
         this.name = name;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
@@ -52,7 +51,7 @@ public class Membership {
         return community;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

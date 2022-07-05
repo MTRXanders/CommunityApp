@@ -2,7 +2,6 @@ package com.example.community.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class CommunityServiceImpl implements CrudService<Community>{
     }
 
     @Override
-    public void deleteEntityById(UUID id) {
+    public void deleteEntityById(Long id) {
        repo.deleteById(id);
     }
 
@@ -34,7 +33,7 @@ public class CommunityServiceImpl implements CrudService<Community>{
     }
 
     @Override
-    public Optional<Community> findById(UUID id) {
+    public Optional<Community> findById(Long id) {
         return repo.findById(id);
     }
 
