@@ -2,7 +2,6 @@ package com.example.community.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class ClaimServiceImpl implements CrudService<Claim> {
     }
 
     @Override
-    public void deleteEntityById(UUID id) {
+    public void deleteEntityById(Long id) {
        claimRepository.deleteById(id);        
     }
 
@@ -33,7 +32,7 @@ public class ClaimServiceImpl implements CrudService<Claim> {
     }
 
     @Override
-    public Optional<Claim> findById(UUID id) {
+    public Optional<Claim> findById(Long id) {
         return claimRepository.findById(id);
     }
 

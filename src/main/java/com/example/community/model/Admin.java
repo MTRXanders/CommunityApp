@@ -1,6 +1,5 @@
 package com.example.community.model;
 
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +16,7 @@ public class Admin {
     @Id
     @Column(name = "admin_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
 
     @Column(name = "name", length = 60, nullable = false)
     private String name;
@@ -26,11 +25,11 @@ public class Admin {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
